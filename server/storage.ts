@@ -67,11 +67,11 @@ export class DatabaseStorage implements IStorage {
     if (existing.length > 0) return;
     
     await db.insert(plans).values([
-      { name: "Starter", price: "49.00", powerKw: "2.89", dailyMin: "8.70", dailyMax: "13.00", description: "Entry level wind power" },
-      { name: "Advanced", price: "99.00", powerKw: "5.78", dailyMin: "17.00", dailyMax: "26.00", description: "Enhanced solar array" },
-      { name: "Pro", price: "149.00", powerKw: "9.44", dailyMin: "28.00", dailyMax: "42.00", description: "Hydroelectric dam access" },
-      { name: "Elite", price: "199.00", powerKw: "13.33", dailyMin: "40.00", dailyMax: "60.00", description: "Geothermal plant share" },
-      { name: "Black", price: "249.00", powerKw: "17.78", dailyMin: "53.00", dailyMax: "80.00", description: "Nuclear fusion prototype" },
+      { name: "Starter", price: "49.00", powerKw: "2.89", dailyMin: "7.00", dailyMax: "26.00", description: "Entry level wind power" },
+      { name: "Advanced", price: "99.00", powerKw: "5.78", dailyMin: "14.00", dailyMax: "52.00", description: "Enhanced solar array" },
+      { name: "Pro", price: "149.00", powerKw: "9.44", dailyMin: "23.00", dailyMax: "85.00", description: "Hydroelectric dam access" },
+      { name: "Elite", price: "199.00", powerKw: "13.33", dailyMin: "33.00", dailyMax: "120.00", description: "Geothermal plant share" },
+      { name: "Black", price: "249.00", powerKw: "17.78", dailyMin: "44.00", dailyMax: "160.00", description: "Nuclear fusion prototype" },
     ]);
   }
 

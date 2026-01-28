@@ -79,7 +79,7 @@ export default function Dashboard() {
           title="Current Plan" 
           value={currentPlan?.name || "None"} 
           icon={Battery}
-          subtext={currentPlan ? `${currentPlan.dailyMin}-${currentPlan.dailyMax} kWh/day` : "No active production"}
+          subtext={currentPlan ? `$${currentPlan.dailyMin}-$${currentPlan.dailyMax}/day` : "No active production"}
           color={currentPlan ? "text-yellow-500" : "text-muted-foreground"}
         />
         <StatCard 
