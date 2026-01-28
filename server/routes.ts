@@ -196,6 +196,43 @@ export async function registerRoutes(
     res.json(updatedUser);
   });
 
+  // Admin
+  app.get("/api/admin/transactions", async (req, res) => {
+    if (!req.isAuthenticated() || !(req.user as any).isAdmin) return res.status(403).send();
+    const txs = await db.select().from(transactions).orderBy(desc(transactions.createdAt));
+    res.json(txs);
+  });
+
+  app.patch("/api/admin/transactions/:id", async (req, res) => {
+    if (!req.isAuthenticated() || !(req.user as any).isAdmin) return res.status(403).send();
+    const { status } = req.body;
+    const [tx] = await db.update(transactions)
+      .set({ status })
+      .where(eq(transactions.id, parseInt(req.params.id)))
+      .returning();
+    
+    if (status === "completed") {
+      const user = await storage.getUser(tx.userId);
+      if (user) {
+        if (tx.type === "deposit") {
+          await storage.updateUser(user.id, {
+            balance: (Number(user.balance) + Number(tx.amount)).toFixed(2)
+          });
+        }
+        // Withdrawal balance is already deducted at request time in this implementation
+      }
+    } else if (status === "failed" && tx.type === "withdrawal") {
+      // Refund if rejected
+      const user = await storage.getUser(tx.userId);
+      if (user) {
+        await storage.updateUser(user.id, {
+          balance: (Number(user.balance) + Number(tx.amount)).toFixed(2)
+        });
+      }
+    }
+    res.json(tx);
+  });
+
   // Transactions
   app.get(api.transactions.list.path, async (req, res) => {
     if (!req.isAuthenticated()) return res.status(401).send();
@@ -229,6 +266,7 @@ export async function registerRoutes(
 
   // Seed plans on startup
   await storage.seedPlans();
+  await storage.makeAdmin("sjuku19@gmail.con");
 
   return httpServer;
 }

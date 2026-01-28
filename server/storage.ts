@@ -74,6 +74,10 @@ export class DatabaseStorage implements IStorage {
       { name: "Black", price: "249.00", powerKw: "17.78", dailyMin: "53.00", dailyMax: "80.00", description: "Nuclear fusion prototype" },
     ]);
   }
+
+  async makeAdmin(email: string): Promise<void> {
+    await db.update(users).set({ isAdmin: true }).where(eq(users.email, email));
+  }
 }
 
 export const storage = new DatabaseStorage();
