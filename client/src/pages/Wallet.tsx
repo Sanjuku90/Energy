@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowUpRight, ArrowDownLeft, Clock, Search, Loader2 } from "lucide-react";
+import { ArrowUpRight, ArrowDownLeft, Clock, Search, Loader2, Copy } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -151,7 +151,7 @@ export default function Wallet() {
                           toast({ title: "Copied", description: "Address copied to clipboard" });
                         }}
                       >
-                        <Package className="w-4 h-4" />
+                        <Copy className="w-4 h-4" />
                       </Button>
                     </div>
                     <p className="text-[10px] text-muted-foreground leading-relaxed">
