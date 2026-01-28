@@ -1,3 +1,6 @@
+import { db, pool } from "./db";
+import { users, plans, transactions, type User, type InsertUser, type Plan, type Transaction } from "@shared/schema";
+import { eq, desc } from "drizzle-orm";
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
@@ -9,7 +12,6 @@ import { Strategy as LocalStrategy } from "passport-local";
 import { scrypt, randomBytes, timingSafeEqual } from "crypto";
 import { promisify } from "util";
 import pgSession from "connect-pg-simple";
-import { pool } from "./db";
 
 const scryptAsync = promisify(scrypt);
 const pgSessionStore = pgSession(session);
