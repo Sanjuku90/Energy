@@ -1,0 +1,120 @@
+
+
+🌍⚡ TIME & ENERGY BANK
+
+Slogan : “Reste connecté. Mine de l’énergie réelle. Gagne de l’argent.”
+
+Concept : Une plateforme où l’utilisateur reste connecté pour activer une centrale énergétique virtuelle, dont la production est convertie en gains réels. Plus il reste connecté, plus sa puissance augmente grâce au réinvestissement automatique et aux améliorations.
+
+
+
+
+⸻
+
+1️⃣ Fonctionnement général
+	1.	L’utilisateur achète un plan (49$ → 249$) qui débloque :
+	•	Une puissance virtuelle (kW) liée à une source d’énergie (solaire, éolien, barrage)
+	•	Accès aux fonctionnalités de minage et au dashboard
+	2.	Dès qu’il se connecte et reste actif, la centrale virtuelle “produit” pour lui.
+	3.	La production est convertie automatiquement en USD ou crypto sur le wallet.
+	4.	L’utilisateur peut réinvestir ses gains pour augmenter sa puissance virtuelle et gagner plus.
+	5.	La production dépend de :
+	•	Temps connecté
+	•	Conditions météo (bonus ×1 → ×1,5)
+	•	Niveau de puissance du plan
+
+⸻
+
+2️⃣ Plans et gains journaliers
+
+Plan	Prix ($)	Puissance (kW)	2h/j	3h/j	4h/j	5h/j	6h/j
+Starter	49	2,89	8,7–13	13–19	17–26	22–32	26 ✅
+Advanced	99	5,78	17–26	26–39	35–52	44–65	52 ✅
+Pro	149	9,44	28–42	42–63	56–84	70–105	85 ✅
+Elite	199	13,33	40–60	60–90	80–120	100–150	120 ✅
+Black	249	17,78	53–80	80–120	107–160	133–200	160 ✅
+
+Notes :
+	•	Plage = météo normale → météo forte
+	•	Valeur max = gain par 6h connecté (Starter calibré à 26$ max)
+	•	Plus l’utilisateur reste connecté, plus il cumule de gains
+
+⸻
+
+3️⃣ Gamification et engagement
+	•	Dashboard animé : éolienne qui tourne, panneau solaire qui s’allume, niveau de barrage visible en temps réel
+	•	Barre temps connecté : montre la progression quotidienne
+	•	Multiplicateurs : météo, réinvestissement, bonus fidélité
+	•	Évolution des plans : réinvestissement automatique → puissance augmente → gains composés
+	•	Challenges quotidiens : rester connecté un certain temps pour débloquer des boosts
+
+
+⸻
+
+3️⃣ Réinvestissement manuel
+	•	L’utilisateur voit ses gains cumulés sur le dashboard
+	•	Il peut choisir d’investir une partie pour :
+	•	Augmenter la puissance virtuelle (kW)
+	•	Accélérer ses gains futurs
+	•	Avantages :
+	•	Liberté totale → pas de surprises
+	•	Effet motivant : il voit directement sa centrale “grandir”
+
+⸻
+
+5️⃣ Dashboard utilisateur
+
+Composants principaux :
+	•	Wallet (USD / Crypto / Mobile Money)
+	•	Temps connecté aujourd’hui / semaine / mois
+	•	Production énergétique en kWh
+	•	Graphiques : gains cumulés, météo, réinvestissement
+	•	Bouton réinvestir ou retirer gains
+	•	Animation centrale énergétique (solaire, éolien, barrage)
+
+⸻
+
+6️⃣ Retraits
+	•	PayPal, USDT, virement bancaire, mobile money
+	•	Cash-out instantané
+	•	Minimum de retrait : configurable (ex. 5$)
+
+⸻
+
+7️⃣ Anti-fraude et sécurité
+	•	Détection activité : souris, clics, scroll
+	•	Proof of Presence : mini défis aléatoires
+	•	Limitation 1 appareil = 1 compte
+	•	Détection scripts et automatisation
+
+⸻
+
+8️⃣ Business Model
+	•	Vente de plans (49$–249$)
+	•	Réinvestissement automatique → puissance augmentée → fidélisation
+	•	Gamification → engagement et viralité
+	•	Options futures : partenariats énergétiques réels, NFT d’énergie virtuelle
+
+⸻
+
+9️⃣ Positionnement légal
+	•	Plateforme de minage énergétique virtuel lié à de l’énergie réelle
+	•	Pas un produit financier, pas un investissement spéculatif
+	•	Transparence totale sur production et conversion en gains
+
+⸻
+
+10️⃣ Points forts pour les utilisateurs
+	•	Starter 49$ → 18–26$/jour pour 6h connecté
+	•	Gamification immersive : animation + météo + progression
+	•	Réinvestissement → gains composés → évolution tangible
+	•	Retrait rapide et flexible
+	•	Visibilité écologique et technologique
+
+⸻
+
+💡 Résumé pitch :
+
+Time & Energy Bank permet aux utilisateurs de gagner de l’argent en restant connectés, tout en activant une centrale énergétique virtuelle liée à de l’énergie propre. Les gains dépendent du temps connecté, de la météo et de la puissance du plan choisi. Gamification et réinvestissement créent une expérience addictive et motivante.
+
+
