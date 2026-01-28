@@ -81,11 +81,21 @@ export default {
           busy: "rgb(239 68 68)",
           offline: "rgb(156 163 175)",
         },
+        energy: {
+          50: "hsl(142, 70%, 96%)",
+          500: "hsl(142, 76%, 36%)",
+          600: "hsl(142, 72%, 29%)",
+        },
+        tech: {
+          500: "hsl(199, 89%, 48%)",
+        },
       },
       fontFamily: {
         sans: ["var(--font-sans)"],
         serif: ["var(--font-serif)"],
         mono: ["var(--font-mono)"],
+        display: ["var(--font-display)"],
+        body: ["var(--font-body)"],
       },
       keyframes: {
         "accordion-down": {
