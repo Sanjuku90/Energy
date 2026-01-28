@@ -35,10 +35,10 @@ export function useMiningHeartbeat() {
   useEffect(() => {
     if (!user) return;
 
-    // Send heartbeat every 60 seconds
+    // Send heartbeat every 1 second for real-time updates
     intervalRef.current = setInterval(() => {
-      mutation.mutate({ connectedSeconds: 60 });
-    }, 60000);
+      mutation.mutate({ connectedSeconds: 1 });
+    }, 1000);
 
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);

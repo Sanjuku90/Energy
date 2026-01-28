@@ -12,7 +12,7 @@ import { Link } from "wouter";
 export default function Dashboard() {
   const { data: user } = useQuery<User>({
     queryKey: ["/api/user"],
-    refetchInterval: 1000,
+    refetchInterval: 500, // Update even faster for smoother UI
   });
   const { data: plans } = usePlans();
   
