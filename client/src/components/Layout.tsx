@@ -2,7 +2,7 @@ import { Link, useLocation } from "wouter";
 import { useLogout } from "@/hooks/use-auth";
 import { useQuery } from "@tanstack/react-query";
 import { User } from "@shared/schema";
-import { Zap, LayoutDashboard, Wallet, LogOut, Package, User as UserIcon, Shield, Settings, ChevronDown } from "lucide-react";
+import { Zap, LayoutDashboard, Wallet, LogOut, Package, User as UserIcon, Shield, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,12 +15,20 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
   const { data: user } = useQuery<User>({
     queryKey: ["/api/user"],
     refetchInterval: 1000,
   });
   const { mutate: logout } = useLogout();
+
+  const handleLogout = () => {
+    logout(undefined, {
+      onSuccess: () => {
+        setLocation("/");
+      },
+    });
+  };
 
   const navItems = [
     { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -132,7 +140,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <DropdownMenuSeparator className="bg-border/50" />
                 <DropdownMenuItem 
                   className="text-destructive focus:text-destructive cursor-pointer"
-                  onClick={() => logout()}
+                  onClick={handleLogout}
                 >
                   <LogOut className="mr-2 h-4 w-4" />
                   Sign Out
