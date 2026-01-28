@@ -4,6 +4,7 @@ import PowerStation from "@/components/PowerStation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Battery, Timer, Zap, DollarSign, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 export default function Dashboard() {
   const { data: user } = useUser();
