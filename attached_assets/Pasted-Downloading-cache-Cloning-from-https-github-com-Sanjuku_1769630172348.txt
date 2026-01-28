@@ -1,0 +1,110 @@
+Downloading cache...
+==> Cloning from https://github.com/Sanjuku90/Energy
+==> Checking out commit 8cfe72eec48f991cda092abdea67b6c15a3bda58 in branch main
+==> Downloaded 202MB in 5s. Extraction took 5s.
+==> Using Node.js version 22.22.0 (default)
+==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+==> Running build command 'npm install; npm run build'...
+up to date, audited 480 packages in 1s
+76 packages are looking for funding
+  run `npm fund` for details
+1 moderate severity vulnerability
+To address all issues, run:
+  npm audit fix
+Run `npm audit` for details.
+> rest-express@1.0.0 build
+> tsx script/build.ts
+building client...
+vite v7.3.0 building client environment for production...
+transforming...
+✓ 2497 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/public/index.html                   2.01 kB │ gzip:   0.77 kB
+../dist/public/assets/index-DDmmJYWF.css   75.25 kB │ gzip:  12.50 kB
+../dist/public/assets/index-Cy5Mu3hX.js   646.27 kB │ gzip: 199.11 kB
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 4.95s
+building server...
+  dist/index.cjs  1.1mb ⚠️
+⚡ Done in 194ms
+==> Uploading build...
+==> Uploaded in 7.3s. Compression took 2.8s
+==> Build successful 🎉
+==> Deploying...
+==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
+==> Running 'npm run start'
+> rest-express@1.0.0 start
+> npm run db:push && NODE_ENV=production node dist/index.cjs
+> rest-express@1.0.0 db:push
+> drizzle-kit push
+No config path provided, using default 'drizzle.config.ts'
+Reading config file '/opt/render/project/src/drizzle.config.ts'
+Using 'pg' driver for database querying
+[⣷] Pulling schema from database...
+[⣯] Pulling schema from database...
+[⣟] Pulling schema from database...
+[⡿] Pulling schema from database...
+[⢿] Pulling schema from database...
+[⣻] Pulling schema from database...
+[⣽] Pulling schema from database...
+[⣷] Pulling schema from database...
+[⣯] Pulling schema from database...
+[⣟] Pulling schema from database...
+[✓] Pulling schema from database...
+[i] No changes detected
+7:54:45 PM [express] serving on port 10000
+==> Your service is live 🎉
+==> 
+==> ///////////////////////////////////////////////////////////
+==> 
+==> Available at your primary URL https://energy-t2yr.onrender.com
+==> 
+==> ///////////////////////////////////////////////////////////
+7:55:08 PM [express] GET /api/user 304 in 20ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:09 PM [express] GET /api/plans 304 in 10ms :: [{"id":1,"name":"Starter","price":"49.00","powerKw":"2.89","dailyMin":"7.00","dailyMax":"26.00","description":"Entry level wind power"},{"id":2,"name":"Advanced","price":"99.00","powerKw":"5.78","dailyMin":"14.00","dailyMax":"52.00","description":"Enhanced solar array"},{"id":3,"name":"Pro","price":"149.00","powerKw":"9.44","dailyMin":"23.00","dailyMax":"85.00","description":"Hydroelectric dam access"},{"id":4,"name":"Elite","price":"199.00","powerKw":"13.33","dailyMin":"33.00","dailyMax":"120.00","description":"Geothermal plant share"},{"id":5,"name":"Black","price":"249.00","powerKw":"17.78","dailyMin":"44.00","dailyMax":"160.00","description":"Nuclear fusion prototype"}]
+7:55:10 PM [express] GET /api/user 304 in 7ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:11 PM [express] GET /api/user 304 in 9ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:13 PM [express] GET /api/user 304 in 9ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:14 PM [express] GET /api/user 304 in 10ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:14 PM [express] GET /api/user 304 in 9ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:14 PM [express] GET /api/admin/transactions 403 in 8ms
+7:55:16 PM [express] GET /api/user 304 in 10ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:16 PM [express] GET /api/user 304 in 6ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:16 PM [express] GET /api/admin/transactions 403 in 8ms
+7:55:17 PM [express] GET /api/user 304 in 50ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:17 PM [express] GET /api/user 304 in 111ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:17 PM [express] GET /api/admin/transactions 403 in 192ms
+7:55:19 PM [express] GET /api/user 304 in 11ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:19 PM [express] GET /api/admin/transactions 403 in 10ms
+7:55:20 PM [express] GET /api/user 304 in 10ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:20 PM [express] GET /api/admin/transactions 403 in 11ms
+7:55:21 PM [express] GET /api/user 304 in 6ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:23 PM [express] GET /api/user 200 in 15ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:23 PM [express] GET /api/admin/transactions 403 in 7ms
+7:55:23 PM [express] GET /api/admin/transactions 403 in 8ms
+7:55:24 PM [express] GET /api/user 304 in 8ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:25 PM [express] GET /api/admin/transactions 403 in 18ms
+7:55:26 PM [express] GET /api/user 304 in 7ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:26 PM [express] GET /api/admin/transactions 403 in 11ms
+7:55:27 PM [express] GET /api/user 304 in 6ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:28 PM [express] GET /api/admin/transactions 403 in 6ms
+7:55:28 PM [express] GET /api/admin/transactions 403 in 8ms
+7:55:28 PM [express] GET /api/user 304 in 6ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:29 PM [express] GET /api/admin/transactions 403 in 7ms
+7:55:35 PM [express] GET /api/user 304 in 6ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:36 PM [express] GET /api/user 304 in 7ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:38 PM [express] GET /api/user 304 in 7ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:39 PM [express] GET /api/user 304 in 10ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:41 PM [express] GET /api/user 304 in 13ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:42 PM [express] GET /api/user 304 in 11ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:43 PM [express] GET /api/user 304 in 12ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:45 PM [express] GET /api/user 304 in 8ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:45 PM [express] GET /api/admin/transactions 403 in 6ms
+7:55:46 PM [express] GET /api/admin/transactions 403 in 9ms
+7:55:47 PM [express] GET /api/user 304 in 7ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
+7:55:47 PM [express] GET /api/admin/transactions 403 in 7ms
+7:55:48 PM [express] GET /api/user 304 in 7ms :: {"id":1,"email":"sjuku19@gmail.com","password":"7b51e1895775b6d30892bdf6c4d4206e2e30d177e68d6c5167e3c15f28ef625c678c61d3570219d4364bcff22bb841822fdf94a5cf0c8403cbf93ded417f0e24.357df368883a30d1f681282da88735b7","username":"aadjrakou9","balance":"0.00","energyBalance":"0.0000","totalConnectedTime":0,"currentPlanId":null,"isAdmin":false,"lastHeartbeat":null,"createdAt":"2026-01-28T19:36:29.001Z"}
