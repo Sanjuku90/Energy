@@ -1,7 +1,11 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { api, type MiningHeartbeatRequest } from "@shared/routes";
+import { api } from "@shared/routes";
 import { useEffect, useRef } from "react";
 import { useUser } from "./use-auth";
+
+export type MiningHeartbeatRequest = {
+  connectedSeconds: number;
+};
 
 // Hook to handle the periodic heartbeat
 export function useMiningHeartbeat() {
