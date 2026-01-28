@@ -96,13 +96,35 @@ export default function Dashboard() {
         <Card className="col-span-1 lg:col-span-2 bg-card border-border/50 shadow-lg">
           <CardHeader>
             <CardTitle className="font-display tracking-wide flex items-center gap-2">
-              <Timer className="w-5 h-5 text-primary" />
-              Production Log
+              <Zap className="w-5 h-5 text-primary" />
+              Active Mining Units
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-[200px] flex items-center justify-center text-muted-foreground bg-black/20 rounded-xl border border-white/5">
-              Chart visualization would go here (Recharts)
+            <div className="space-y-4">
+              {activePlans.length > 0 ? (
+                activePlans.map((plan, i) => (
+                  <div key={`${plan.id}-${i}`} className="flex items-center justify-between p-4 bg-black/20 rounded-xl border border-white/5 hover:border-primary/20 transition-colors">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-primary/10">
+                        <Zap className="w-4 h-4 text-primary" />
+                      </div>
+                      <div>
+                        <p className="font-bold">{plan.name}</p>
+                        <p className="text-xs text-muted-foreground">{plan.powerKw} kW Power Output</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm font-mono text-primary">+${(Number(plan.dailyMax) / 6 / 3600).toFixed(6)}/s</p>
+                      <Badge variant="outline" className="text-[10px] h-4">ACTIVE</Badge>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="h-[200px] flex items-center justify-center text-muted-foreground bg-black/20 rounded-xl border border-white/5">
+                  No active units found.
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>
