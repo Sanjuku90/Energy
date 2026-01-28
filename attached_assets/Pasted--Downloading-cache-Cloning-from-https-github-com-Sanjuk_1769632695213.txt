@@ -1,0 +1,112 @@
+ Downloading cache...
+==> Cloning from https://github.com/Sanjuku90/Energy
+==> Checking out commit cb25941f24f5606d23a06d6c2412ef7ddd7fc157 in branch main
+==> Downloaded 202MB in 6s. Extraction took 5s.
+==> Using Node.js version 22.22.0 (default)
+==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+==> Running build command 'npm install; npm run build'...
+added 24 packages, removed 66 packages, changed 135 packages, and audited 438 packages in 4s
+64 packages are looking for funding
+  run `npm fund` for details
+found 0 vulnerabilities
+> rest-express@1.0.0 build
+> tsx script/build.ts
+building client...
+vite v7.3.1 building client environment for production...
+transforming...
+✓ 2518 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/public/index.html                   2.01 kB │ gzip:   0.77 kB
+../dist/public/assets/index-m36uJt7m.css   75.41 kB │ gzip:  12.52 kB
+../dist/public/assets/index-DUTs_Wy_.js   659.45 kB │ gzip: 202.82 kB
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 5.10s
+building server...
+  dist/index.cjs  1.0mb ⚠️
+⚡ Done in 317ms
+==> Uploading build...
+==> Uploaded in 8.4s. Compression took 3.6s
+==> Build successful 🎉
+==> Deploying...
+==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
+==> Running 'npm run start'
+> rest-express@1.0.0 start
+> npm run db:push && NODE_ENV=production node dist/index.cjs
+> rest-express@1.0.0 db:push
+> drizzle-kit push
+No config path provided, using default 'drizzle.config.ts'
+Reading config file '/opt/render/project/src/drizzle.config.ts'
+Using 'pg' driver for database querying
+[⣷] Pulling schema from database...
+[⣯] Pulling schema from database...
+[⣟] Pulling schema from database...
+[⡿] Pulling schema from database...
+[⢿] Pulling schema from database...
+[⣻] Pulling schema from database...
+[⣽] Pulling schema from database...
+[⣷] Pulling schema from database...
+[⣯] Pulling schema from database...
+[⣟] Pulling schema from database...
+[✓] Pulling schema from database...
+Is active_plan_ids column in users table created or renamed from another column?
+❯ + active_plan_ids                   create column
+  ~ current_plan_id › active_plan_ids rename column8:36:13 PM [express] serving on port 10000
+==> Your service is live 🎉
+==> 
+==> ///////////////////////////////////////////////////////////
+==> 
+==> Available at your primary URL https://energy-t2yr.onrender.com
+==> 
+==> ///////////////////////////////////////////////////////////
+Internal Server Error: error: column "active_plan_ids" does not exist
+    at /opt/render/project/src/dist/index.cjs:59:14227
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async /opt/render/project/src/dist/index.cjs:71:31364
+    at async Zf.getUser (/opt/render/project/src/dist/index.cjs:71:99963)
+    at async /opt/render/project/src/dist/index.cjs:71:103899 {
+  length: 116,
+  severity: 'ERROR',
+  code: '42703',
+  detail: undefined,
+  hint: undefined,
+  position: '100',
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'parse_relation.c',
+  line: '3822',
+  routine: 'errorMissingColumn'
+}
+Internal Server Error: error: column "active_plan_ids" does not exist
+    at /opt/render/project/src/dist/index.cjs:59:14227
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async /opt/render/project/src/dist/index.cjs:71:31364
+    at async Zf.getUser (/opt/render/project/src/dist/index.cjs:71:99963)
+    at async /opt/render/project/src/dist/index.cjs:71:103899 {
+  length: 116,
+  severity: 'ERROR',
+  code: '42703',
+  detail: undefined,
+  hint: undefined,
+  position: '100',
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'parse_relation.c',
+  line: '3822',
+  routine: 'errorMissingColumn'
+}
