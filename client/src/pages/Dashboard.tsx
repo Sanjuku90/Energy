@@ -5,7 +5,7 @@ import PowerStation from "@/components/PowerStation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Battery, Zap, DollarSign, TrendingUp } from "lucide-react";
+import { Battery, Zap, DollarSign, TrendingUp, Timer } from "lucide-react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Link } from "wouter";
