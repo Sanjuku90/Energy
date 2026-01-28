@@ -2,9 +2,11 @@ import { useUser } from "@/hooks/use-auth";
 import { useMiningHeartbeat, usePlans } from "@/hooks/use-mining";
 import PowerStation from "@/components/PowerStation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Battery, Timer, Zap, DollarSign, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { Link } from "wouter";
 
 export default function Dashboard() {
   const { data: user } = useUser();
@@ -15,8 +17,8 @@ export default function Dashboard() {
   
   if (!user || !plans) return null; // Or skeleton
 
-  const currentPlan = plans.find(p => p.id === user.currentPlanId) || plans[0];
-  const powerOutput = parseFloat(currentPlan.powerKw);
+  const currentPlan = plans.find(p => p.id === user.currentPlanId);
+  const powerOutput = currentPlan ? parseFloat(currentPlan.powerKw) : 0;
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
@@ -26,16 +28,33 @@ export default function Dashboard() {
           <p className="text-muted-foreground">Monitoring active energy production matrix.</p>
         </div>
         <div className="flex items-center gap-2 bg-card border border-border px-4 py-2 rounded-full">
-          <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-          <span className="text-sm font-mono text-primary">LIVE CONNECTION</span>
+          <div className={cn("w-2 h-2 rounded-full", isMining && currentPlan ? "bg-primary animate-pulse" : "bg-muted")} />
+          <span className="text-sm font-mono text-primary uppercase">
+            {isMining && currentPlan ? "LIVE CONNECTION" : "DISCONNECTED"}
+          </span>
         </div>
       </div>
 
-      <PowerStation 
-        powerOutput={powerOutput} 
-        isActive={isMining} 
-        planName={currentPlan.name} 
-      />
+      {currentPlan ? (
+        <PowerStation 
+          powerOutput={powerOutput} 
+          isActive={isMining} 
+          planName={currentPlan.name} 
+        />
+      ) : (
+        <Card className="bg-card border-dashed border-2 border-border/50 p-12 text-center">
+          <CardContent className="space-y-4">
+            <Battery className="w-12 h-12 mx-auto text-muted-foreground opacity-20" />
+            <h2 className="text-xl font-display font-bold">No Active Power Plan</h2>
+            <p className="text-muted-foreground max-w-sm mx-auto">
+              You haven't activated a power station yet. Purchase a plan to start mining energy.
+            </p>
+            <Button asChild>
+              <Link href="/plans">View Available Plans</Link>
+            </Button>
+          </CardContent>
+        </Card>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard 
@@ -54,10 +73,10 @@ export default function Dashboard() {
         />
         <StatCard 
           title="Current Plan" 
-          value={currentPlan.name} 
+          value={currentPlan?.name || "None"} 
           icon={Battery}
-          subtext={`${currentPlan.dailyMin}-${currentPlan.dailyMax} kWh/day`}
-          color="text-yellow-500"
+          subtext={currentPlan ? `${currentPlan.dailyMin}-${currentPlan.dailyMax} kWh/day` : "No active production"}
+          color={currentPlan ? "text-yellow-500" : "text-muted-foreground"}
         />
         <StatCard 
           title="Efficiency" 

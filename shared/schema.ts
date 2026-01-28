@@ -12,7 +12,7 @@ export const users = pgTable("users", {
   balance: decimal("balance", { precision: 10, scale: 2 }).default("0").notNull(), // In USD
   energyBalance: decimal("energy_balance", { precision: 10, scale: 4 }).default("0").notNull(), // In kWh
   totalConnectedTime: integer("total_connected_time").default(0).notNull(), // In seconds
-  currentPlanId: integer("current_plan_id").default(1).notNull(), // 1 = Starter
+  currentPlanId: integer("current_plan_id"), // Null means no active plan
   lastHeartbeat: timestamp("last_heartbeat"),
   createdAt: timestamp("created_at").defaultNow(),
 });
