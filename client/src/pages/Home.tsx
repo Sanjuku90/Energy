@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLogin, useRegister, useUser } from "@/hooks/use-auth";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
@@ -32,10 +32,13 @@ export default function Home() {
   const { mutate: register, isPending: isRegisterPending } = useRegister();
   
   // If user is already logged in, redirect to dashboard
-  if (user) {
-    setLocation("/dashboard");
-    return null;
-  }
+  useEffect(() => {
+    if (user) {
+      setLocation("/dashboard");
+    }
+  }, [user, setLocation]);
+
+  if (user) return null;
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
