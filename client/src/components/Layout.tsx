@@ -1,6 +1,8 @@
 import { Link, useLocation } from "wouter";
-import { useUser, useLogout } from "@/hooks/use-auth";
-import { Zap, LayoutDashboard, Wallet, LogOut, Package, User, Shield, Settings, ChevronDown } from "lucide-react";
+import { useLogout } from "@/hooks/use-auth";
+import { useQuery } from "@tanstack/react-query";
+import { User } from "@shared/schema";
+import { Zap, LayoutDashboard, Wallet, LogOut, Package, User as UserIcon, Shield, Settings, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,7 +16,10 @@ import {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
-  const { data: user } = useUser();
+  const { data: user } = useQuery<User>({
+    queryKey: ["/api/user"],
+    refetchInterval: 1000,
+  });
   const { mutate: logout } = useLogout();
 
   const navItems = [
@@ -75,7 +80,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-10 w-10 rounded-full bg-muted p-0 hover:bg-muted/80">
-                  <User className="h-5 w-5 text-muted-foreground" />
+                  <UserIcon className="h-5 w-5 text-muted-foreground" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56 mt-2 border-border/50 bg-background/95 backdrop-blur-md">
@@ -106,7 +111,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link href="/profile" className="cursor-pointer">
-                    <User className="mr-2 h-4 w-4" />
+                    <UserIcon className="mr-2 h-4 w-4" />
                     Profile
                   </Link>
                 </DropdownMenuItem>

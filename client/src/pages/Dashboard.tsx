@@ -1,4 +1,5 @@
-import { useUser } from "@/hooks/use-auth";
+import { useQuery } from "@tanstack/react-query";
+import { User } from "@shared/schema";
 import { useMiningHeartbeat, usePlans } from "@/hooks/use-mining";
 import PowerStation from "@/components/PowerStation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,7 +10,10 @@ import { cn } from "@/lib/utils";
 import { Link } from "wouter";
 
 export default function Dashboard() {
-  const { data: user } = useUser();
+  const { data: user } = useQuery<User>({
+    queryKey: ["/api/user"],
+    refetchInterval: 1000,
+  });
   const { data: plans } = usePlans();
   
   // Mining hook automatically sends heartbeats

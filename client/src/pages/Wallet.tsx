@@ -15,6 +15,8 @@ import { useToast } from "@/hooks/use-toast";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { queryClient, apiRequest } from "@/lib/queryClient";
+import { useQuery } from "@tanstack/react-query";
+import { User } from "@shared/schema";
 
 const withdrawSchema = z.object({
   amount: z.coerce.number().min(10, "Minimum withdrawal is $10"),
@@ -28,7 +30,10 @@ const depositSchema = z.object({
 });
 
 export default function Wallet() {
-  const { data: user } = useUser();
+  const { data: user } = useQuery<User>({
+    queryKey: ["/api/user"],
+    refetchInterval: 1000,
+  });
   const { data: transactions, isLoading } = useTransactions();
   const { mutate: withdraw, isPending: isWithdrawPending } = useWithdraw();
   const { toast } = useToast();
