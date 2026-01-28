@@ -14,6 +14,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from "@/component
 import { useToast } from "@/hooks/use-toast";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import { queryClient, apiRequest } from "@/lib/queryClient";
 
 const withdrawSchema = z.object({
   amount: z.coerce.number().min(10, "Minimum withdrawal is $10"),
@@ -21,13 +22,18 @@ const withdrawSchema = z.object({
   destination: z.string().min(3, "Enter a valid address/email"),
 });
 
+const depositSchema = z.object({
+  amount: z.coerce.number().min(10, "Minimum deposit is $10"),
+  transactionHash: z.string().min(10, "Enter a valid transaction hash/ID"),
+});
+
 export default function Wallet() {
   const { data: user } = useUser();
   const { data: transactions, isLoading } = useTransactions();
-  const { mutate: withdraw, isPending } = useWithdraw();
+  const { mutate: withdraw, isPending: isWithdrawPending } = useWithdraw();
   const { toast } = useToast();
 
-  const form = useForm<z.infer<typeof withdrawSchema>>({
+  const withdrawForm = useForm<z.infer<typeof withdrawSchema>>({
     resolver: zodResolver(withdrawSchema),
     defaultValues: {
       amount: 0,
@@ -36,7 +42,15 @@ export default function Wallet() {
     },
   });
 
-  const onSubmit = (data: z.infer<typeof withdrawSchema>) => {
+  const depositForm = useForm<z.infer<typeof depositSchema>>({
+    resolver: zodResolver(depositSchema),
+    defaultValues: {
+      amount: 0,
+      transactionHash: "",
+    },
+  });
+
+  const onWithdrawSubmit = (data: z.infer<typeof withdrawSchema>) => {
     if (Number(user?.balance) < data.amount) {
       toast({ title: "Error", description: "Insufficient balance", variant: "destructive" });
       return;
@@ -44,12 +58,23 @@ export default function Wallet() {
     withdraw(data, {
       onSuccess: () => {
         toast({ title: "Success", description: "Withdrawal request submitted" });
-        form.reset();
+        withdrawForm.reset();
       },
       onError: (err) => {
         toast({ title: "Error", description: err.message, variant: "destructive" });
       }
     });
+  };
+
+  const onDepositSubmit = async (data: z.infer<typeof depositSchema>) => {
+    try {
+      await apiRequest("POST", "/api/transactions/deposit", data);
+      toast({ title: "Success", description: "Deposit request submitted. Waiting for validation." });
+      depositForm.reset();
+      queryClient.invalidateQueries({ queryKey: ["/api/transactions"] });
+    } catch (err: any) {
+      toast({ title: "Error", description: err.message, variant: "destructive" });
+    }
   };
 
   if (!user) return null;
@@ -73,10 +98,10 @@ export default function Wallet() {
               </TabsList>
               
               <TabsContent value="withdraw">
-                <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <Form {...withdrawForm}>
+                  <form onSubmit={withdrawForm.handleSubmit(onWithdrawSubmit)} className="space-y-4">
                     <FormField
-                      control={form.control}
+                      control={withdrawForm.control}
                       name="amount"
                       render={({ field }) => (
                         <FormItem>
@@ -93,7 +118,7 @@ export default function Wallet() {
                     />
                     
                     <FormField
-                      control={form.control}
+                      control={withdrawForm.control}
                       name="method"
                       render={({ field }) => (
                         <FormItem>
@@ -116,7 +141,7 @@ export default function Wallet() {
                     />
                     
                     <FormField
-                      control={form.control}
+                      control={withdrawForm.control}
                       name="destination"
                       render={({ field }) => (
                         <FormItem>
@@ -129,8 +154,8 @@ export default function Wallet() {
                       )}
                     />
                     
-                    <Button type="submit" className="w-full font-bold uppercase tracking-wider" disabled={isPending}>
-                      {isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : "Request Withdrawal"}
+                    <Button type="submit" className="w-full font-bold uppercase tracking-wider" disabled={isWithdrawPending}>
+                      {isWithdrawPending ? <Loader2 className="w-4 h-4 animate-spin" /> : "Request Withdrawal"}
                     </Button>
                   </form>
                 </Form>
@@ -155,13 +180,46 @@ export default function Wallet() {
                       </Button>
                     </div>
                     <p className="text-[10px] text-muted-foreground leading-relaxed">
-                      Send only USDT via TRC20 network. Deposits will be credited after 1 network confirmation.
+                      Send only USDT via TRC20 network.
                     </p>
                   </div>
 
-                  <div className="text-center py-4 border-t border-border/30">
-                    <p className="text-xs text-muted-foreground">Manual top-up supported. Contact admin after transfer.</p>
-                  </div>
+                  <Form {...depositForm}>
+                    <form onSubmit={depositForm.handleSubmit(onDepositSubmit)} className="space-y-4 border-t border-border/30 pt-4">
+                      <FormField
+                        control={depositForm.control}
+                        name="amount"
+                        render={({ field }) => (
+                          <FormItem>
+                            <Label>Amount Deposited (USD)</Label>
+                            <FormControl>
+                              <div className="relative">
+                                <span className="absolute left-3 top-2.5 text-muted-foreground">$</span>
+                                <Input type="number" className="pl-6 bg-background border-border" {...field} />
+                              </div>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={depositForm.control}
+                        name="transactionHash"
+                        render={({ field }) => (
+                          <FormItem>
+                            <Label>Transaction Hash / ID</Label>
+                            <FormControl>
+                              <Input className="bg-background border-border" placeholder="Paste TXID here" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <Button type="submit" className="w-full font-bold uppercase tracking-wider">
+                        Confirm Deposit
+                      </Button>
+                    </form>
+                  </Form>
                 </div>
               </TabsContent>
             </Tabs>

@@ -198,6 +198,22 @@ export async function registerRoutes(
     res.json(updatedUser);
   });
 
+  app.post("/api/transactions/deposit", async (req, res) => {
+    if (!req.isAuthenticated()) return res.status(401).send();
+    const user = req.user as any;
+    const { amount, transactionHash } = req.body;
+
+    const tx = await storage.createTransaction({
+      userId: user.id,
+      amount: amount.toString(),
+      type: "deposit",
+      status: "pending",
+      metadata: { transactionHash }
+    });
+
+    res.status(201).json(tx);
+  });
+
   // Admin
   app.get("/api/admin/transactions", async (req, res) => {
     if (!req.isAuthenticated() || !(req.user as any).isAdmin) return res.status(403).send();
