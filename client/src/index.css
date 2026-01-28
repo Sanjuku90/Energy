@@ -38,6 +38,24 @@
   --input: 217 30% 20%;
   --ring: 142 70% 50%;
   
+  --card-border: 217 30% 25%;
+  --popover-border: 217 30% 25%;
+  
+  --sidebar: 220 20% 12%;
+  --sidebar-foreground: 160 30% 90%;
+  --sidebar-border: 217 30% 20%;
+  --sidebar-primary: 142 70% 50%;
+  --sidebar-primary-foreground: 145 80% 10%;
+  --sidebar-accent: 190 90% 50%;
+  --sidebar-accent-foreground: 195 80% 10%;
+  --sidebar-ring: 142 70% 50%;
+  
+  --chart-1: 142 70% 50%;
+  --chart-2: 190 90% 50%;
+  --chart-3: 45 93% 58%;
+  --chart-4: 280 65% 60%;
+  --chart-5: 340 75% 55%;
+  
   --radius: 0.5rem;
 }
 
