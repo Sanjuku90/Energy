@@ -1,0 +1,215 @@
+ Downloading cache...
+==> Cloning from https://github.com/Sanjuku90/Energy
+==> Checking out commit d0970dc890c365ea6a0b4232decef37ec89e6168 in branch main
+==> Downloaded 202MB in 4s. Extraction took 4s.
+==> Using Node.js version 22.22.0 (default)
+==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+==> Running build command 'npm install; npm run build'...
+up to date, audited 480 packages in 933ms
+76 packages are looking for funding
+  run `npm fund` for details
+1 moderate severity vulnerability
+To address all issues, run:
+  npm audit fix
+Run `npm audit` for details.
+> rest-express@1.0.0 build
+> tsx script/build.ts
+building client...
+vite v7.3.0 building client environment for production...
+transforming...
+✓ 2497 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/public/index.html                   2.01 kB │ gzip:   0.77 kB
+../dist/public/assets/index-m36uJt7m.css   75.41 kB │ gzip:  12.52 kB
+../dist/public/assets/index-D05a7xy2.js   647.43 kB │ gzip: 199.42 kB
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 4.62s
+building server...
+  dist/index.cjs  1.1mb ⚠️
+⚡ Done in 196ms
+==> Uploading build...
+==> Uploaded in 6.4s. Compression took 3.2s
+==> Build successful 🎉
+==> Deploying...
+==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
+==> Running 'npm run start'
+> rest-express@1.0.0 start
+> npm run db:push && NODE_ENV=production node dist/index.cjs
+> rest-express@1.0.0 db:push
+> drizzle-kit push
+No config path provided, using default 'drizzle.config.ts'
+Reading config file '/opt/render/project/src/drizzle.config.ts'
+Using 'pg' driver for database querying
+[⣷] Pulling schema from database...
+[⣯] Pulling schema from database...
+[⣟] Pulling schema from database...
+[⡿] Pulling schema from database...
+[⢿] Pulling schema from database...
+[⣻] Pulling schema from database...
+[⣽] Pulling schema from database...
+[⣷] Pulling schema from database...
+[⣯] Pulling schema from database...
+[⣟] Pulling schema from database...
+[✓] Pulling schema from database...
+Is active_plan_ids column in users table created or renamed from another column?
+❯ + active_plan_ids                   create column
+  ~ current_plan_id › active_plan_ids rename column8:26:19 PM [express] serving on port 10000
+==> Your service is live 🎉
+==> 
+==> ///////////////////////////////////////////////////////////
+==> 
+==> Available at your primary URL https://energy-t2yr.onrender.com
+==> 
+==> ///////////////////////////////////////////////////////////
+Internal Server Error: error: column "active_plan_ids" does not exist
+    at /opt/render/project/src/dist/index.cjs:68:13326
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async /opt/render/project/src/dist/index.cjs:80:31364
+    at async _f.getUser (/opt/render/project/src/dist/index.cjs:80:100637)
+    at async /opt/render/project/src/dist/index.cjs:80:104531 {
+  length: 116,
+  severity: 'ERROR',
+  code: '42703',
+  detail: undefined,
+  hint: undefined,
+  position: '100',
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'parse_relation.c',
+  line: '3822',
+  routine: 'errorMissingColumn'
+}
+Internal Server Error: error: column "active_plan_ids" does not exist
+    at /opt/render/project/src/dist/index.cjs:68:13326
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async /opt/render/project/src/dist/index.cjs:80:31364
+    at async _f.getUser (/opt/render/project/src/dist/index.cjs:80:100637)
+    at async /opt/render/project/src/dist/index.cjs:80:104531 {
+  length: 116,
+  severity: 'ERROR',
+  code: '42703',
+  detail: undefined,
+  hint: undefined,
+  position: '100',
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'parse_relation.c',
+  line: '3822',
+  routine: 'errorMissingColumn'
+}
+8:26:54 PM [express] GET /api/admin/transactions 500 in 145ms :: {"message":"column \"active_plan_ids\" does not exist"}
+8:26:54 PM [express] GET /api/user 500 in 137ms :: {"message":"column \"active_plan_ids\" does not exist"}
+Internal Server Error: error: column "active_plan_ids" does not exist
+    at /opt/render/project/src/dist/index.cjs:68:13326
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async /opt/render/project/src/dist/index.cjs:80:31364
+    at async _f.getUser (/opt/render/project/src/dist/index.cjs:80:100637)
+    at async /opt/render/project/src/dist/index.cjs:80:104531 {
+  length: 116,
+  severity: 'ERROR',
+  code: '42703',
+  detail: undefined,
+  hint: undefined,
+  position: '100',
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'parse_relation.c',
+  line: '3822',
+  routine: 'errorMissingColumn'
+}
+8:26:56 PM [express] GET /api/admin/transactions 500 in 9ms :: {"message":"column \"active_plan_ids\" does not exist"}
+Internal Server Error: error: column "active_plan_ids" does not exist
+    at /opt/render/project/src/dist/index.cjs:68:13326
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async /opt/render/project/src/dist/index.cjs:80:31364
+    at async _f.getUser (/opt/render/project/src/dist/index.cjs:80:100637)
+    at async /opt/render/project/src/dist/index.cjs:80:104531 {
+  length: 116,
+  severity: 'ERROR',
+  code: '42703',
+  detail: undefined,
+  hint: undefined,
+  position: '100',
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'parse_relation.c',
+  line: '3822',
+  routine: 'errorMissingColumn'
+}
+8:26:56 PM [express] GET /api/user 500 in 19ms :: {"message":"column \"active_plan_ids\" does not exist"}
+Internal Server Error: error: column "active_plan_ids" does not exist
+    at /opt/render/project/src/dist/index.cjs:68:13326
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async /opt/render/project/src/dist/index.cjs:80:31364
+    at async _f.getUser (/opt/render/project/src/dist/index.cjs:80:100637)
+    at async /opt/render/project/src/dist/index.cjs:80:104531 {
+  length: 116,
+  severity: 'ERROR',
+  code: '42703',
+  detail: undefined,
+  hint: undefined,
+  position: '100',
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'parse_relation.c',
+  line: '3822',
+  routine: 'errorMissingColumn'
+}
+Internal Server Error: error: column "active_plan_ids" does not exist
+    at /opt/render/project/src/dist/index.cjs:68:13326
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async /opt/render/project/src/dist/index.cjs:80:31364
+    at async _f.getUser (/opt/render/project/src/dist/index.cjs:80:100637)
+    at async /opt/render/project/src/dist/index.cjs:80:104531 {
+  length: 116,
+  severity: 'ERROR',
+  code: '42703',
+  detail: undefined,
+  hint: undefined,
+  position: '100',
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'parse_relation.c',
+  line: '3822',
+  routine: 'errorMissingColumn'
+}
