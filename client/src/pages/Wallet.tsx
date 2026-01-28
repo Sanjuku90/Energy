@@ -137,9 +137,31 @@ export default function Wallet() {
               </TabsContent>
               
               <TabsContent value="deposit">
-                <div className="text-center py-8 text-muted-foreground">
-                  <p>Deposit functionality coming soon.</p>
-                  <p className="text-xs mt-2">Contact support for manual top-up.</p>
+                <div className="space-y-6 pt-4">
+                  <div className="bg-primary/5 border border-primary/20 rounded-xl p-6 text-center">
+                    <p className="text-sm text-muted-foreground mb-4 uppercase tracking-widest font-mono">USDT TRC20 Address</p>
+                    <div className="bg-background border border-border p-3 rounded-lg flex items-center justify-between gap-3 mb-4">
+                      <code className="text-xs font-mono text-primary break-all select-all">ТNfP6AXj1cQfQSEscQDs9hkUKQnLx5GyBF</code>
+                      <Button 
+                        size="sm" 
+                        variant="ghost" 
+                        className="h-8 w-8 p-0"
+                        onClick={() => {
+                          navigator.clipboard.writeText("ТNfP6AXj1cQfQSEscQDs9hkUKQnLx5GyBF");
+                          toast({ title: "Copied", description: "Address copied to clipboard" });
+                        }}
+                      >
+                        <Package className="w-4 h-4" />
+                      </Button>
+                    </div>
+                    <p className="text-[10px] text-muted-foreground leading-relaxed">
+                      Send only USDT via TRC20 network. Deposits will be credited after 1 network confirmation.
+                    </p>
+                  </div>
+
+                  <div className="text-center py-4 border-t border-border/30">
+                    <p className="text-xs text-muted-foreground">Manual top-up supported. Contact admin after transfer.</p>
+                  </div>
                 </div>
               </TabsContent>
             </Tabs>
