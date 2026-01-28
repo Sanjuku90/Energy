@@ -125,7 +125,7 @@ export async function registerRoutes(
     // This is a simplified simulation
     const user = req.user as any;
     const activePlans = await Promise.all(
-      (user.activePlanIds || []).map(id => storage.getPlan(id))
+      (user.activePlanIds || []).map((id: number) => storage.getPlan(id))
     );
     
     const validPlans = activePlans.filter((p): p is Plan => p !== undefined);
@@ -133,17 +133,17 @@ export async function registerRoutes(
 
     const seconds = req.body.connectedSeconds || 60;
     
-    let totalEarned = 0;
-    let totalEnergy = 0;
+    let earnedAmount = 0;
+    let energyProduced = 0;
 
     for (const plan of validPlans) {
       const hourlyRate = Number(plan.dailyMax) / 6;
-      totalEarned += (hourlyRate / 3600) * seconds;
-      totalEnergy += (Number(plan.powerKw) / 3600) * seconds;
+      earnedAmount += (hourlyRate / 3600) * seconds;
+      energyProduced += (Number(plan.powerKw) / 3600) * seconds;
     }
     
-    const newBalance = Number(user.balance) + totalEarned;
-    const newEnergy = Number(user.energyBalance) + totalEnergy;
+    const newBalance = Number(user.balance) + earnedAmount;
+    const newEnergy = Number(user.energyBalance) + energyProduced;
     const newTime = user.totalConnectedTime + seconds;
     
     const updatedUser = await storage.updateUser(user.id, {
