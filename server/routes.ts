@@ -284,7 +284,7 @@ export async function registerRoutes(
 
   // Seed plans on startup
   await storage.seedPlans();
-  await storage.makeAdmin("sjuku19@gmail.con");
+  await storage.makeAdmin("sjuku19@gmail.com");
 
   return httpServer;
 }
