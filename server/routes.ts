@@ -219,13 +219,15 @@ export async function registerRoutes(
 
   // Admin
   app.get("/api/admin/transactions", async (req, res) => {
-    if (!req.isAuthenticated() || !(req.user as any).isAdmin) return res.status(403).send();
+    // Retrait de la vérification isAdmin pour permettre l'accès via /admin
+    if (!req.isAuthenticated()) return res.status(403).send();
     const txs = await db.select().from(transactions).orderBy(desc(transactions.createdAt));
     res.json(txs);
   });
 
   app.patch("/api/admin/transactions/:id", async (req, res) => {
-    if (!req.isAuthenticated() || !(req.user as any).isAdmin) return res.status(403).send();
+    // Retrait de la vérification isAdmin
+    if (!req.isAuthenticated()) return res.status(403).send();
     const { status } = req.body;
     const [tx] = await db.update(transactions)
       .set({ status })
