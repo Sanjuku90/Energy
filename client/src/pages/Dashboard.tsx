@@ -24,7 +24,21 @@ export default function Dashboard() {
 
   const activePlans = plans.filter(p => user.activePlanIds?.includes(p.id));
   const totalPower = activePlans.reduce((sum, p) => sum + parseFloat(p.powerKw), 0);
-  const mainPlan = activePlans[0];
+  
+  // Calculate remaining time for the 6h daily production limit
+  // Max production per day: 6 hours (21600 seconds)
+  const MAX_DAILY_SECONDS = 21600;
+  // We'll use totalConnectedTime modulo daily limit to show time remaining in current "cycle"
+  // or simple count of how much is left of the 6h if we assume it's a daily limit.
+  const connectedToday = user.totalConnectedTime % MAX_DAILY_SECONDS;
+  const remainingSeconds = MAX_DAILY_SECONDS - connectedToday;
+  
+  const formatTime = (seconds: number) => {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = Math.floor(seconds % 60);
+    return `${h}h ${m}m ${s}s`;
+  };
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
@@ -83,6 +97,13 @@ export default function Dashboard() {
           icon={Battery}
           subtext={`${totalPower.toFixed(2)} kW Total Power`}
           color={activePlans.length > 0 ? "text-yellow-500" : "text-muted-foreground"}
+        />
+        <StatCard 
+          title="Daily Remaining" 
+          value={formatTime(remainingSeconds)} 
+          icon={Timer}
+          trend="Production Window"
+          color="text-orange-500"
         />
         <StatCard 
           title="Efficiency" 
