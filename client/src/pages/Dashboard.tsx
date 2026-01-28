@@ -1,14 +1,14 @@
-import { Badge } from "@/components/ui/badge";
-import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { User } from "@shared/schema";
 import { useMiningHeartbeat, usePlans } from "@/hooks/use-mining";
 import PowerStation from "@/components/PowerStation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Battery, Zap, DollarSign, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { Link } from "wouter";
 
 export default function Dashboard() {
   const { data: user } = useQuery<User>({
