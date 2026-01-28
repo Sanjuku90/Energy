@@ -36,7 +36,10 @@ export async function registerRoutes(
   // === AUTH SETUP ===
   app.use(
     session({
-      store: new pgSessionStore({ pool, createTableIfMissing: true }),
+      store: new pgSessionStore({ 
+        pool, 
+        createTableIfMissing: process.env.NODE_ENV !== "production" 
+      }),
       secret: process.env.SESSION_SECRET || "default_secret",
       resave: false,
       saveUninitialized: false,
