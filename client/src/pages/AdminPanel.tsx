@@ -13,6 +13,7 @@ export default function AdminPanel() {
   const { toast } = useToast();
   const { data: transactions, isLoading } = useQuery<Transaction[]>({
     queryKey: ["/api/admin/transactions"],
+    refetchInterval: 1000, // Actualisation toutes les secondes
   });
 
   const updateStatus = useMutation({
