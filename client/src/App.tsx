@@ -12,6 +12,8 @@ import Dashboard from "@/pages/Dashboard";
 import Plans from "@/pages/Plans";
 import Wallet from "@/pages/Wallet";
 import AdminPanel from "@/pages/AdminPanel";
+import Profile from "@/pages/Profile";
+import Settings from "@/pages/Settings";
 
 function Router() {
   return (
@@ -31,6 +33,12 @@ function Router() {
       </Route>
       <Route path="/admin">
         <Layout><AdminPanel /></Layout>
+      </Route>
+      <Route path="/profile">
+        <Layout><Profile /></Layout>
+      </Route>
+      <Route path="/settings">
+        <Layout><Settings /></Layout>
       </Route>
 
       {/* Fallback */}
