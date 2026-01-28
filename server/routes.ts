@@ -124,26 +124,26 @@ export async function registerRoutes(
     // Logic: Calculate earnings based on plan and time
     // This is a simplified simulation
     const user = req.user as any;
-    const plan = await storage.getPlan(user.currentPlanId);
+    const activePlans = await Promise.all(
+      (user.activePlanIds || []).map(id => storage.getPlan(id))
+    );
     
-    if (!plan) return res.status(500).json({ message: "Plan not found" });
+    const validPlans = activePlans.filter((p): p is Plan => p !== undefined);
+    if (validPlans.length === 0) return res.status(200).json({ earnedAmount: 0, newBalance: Number(user.balance), energyProduced: 0 });
 
-    // Use seconds from request to calculate precise earnings
     const seconds = req.body.connectedSeconds || 60;
     
-    // Earnings calculation: 
-    // Daily Min is based on ~2h (7200s), Max on ~6h (21600s)
-    // Let's use an average hourly rate derived from DailyMax / 6h
-    const hourlyRate = Number(plan.dailyMax) / 6;
-    const earnedAmount = (hourlyRate / 3600) * seconds;
-    
-    // Energy: 1 kW * 1h = 1 kWh. 
-    // Let's say powerKw is the rate per hour.
-    const energyProduced = (Number(plan.powerKw) / 3600) * seconds;
+    let totalEarned = 0;
+    let totalEnergy = 0;
 
-    // Update user
-    const newBalance = Number(user.balance) + earnedAmount;
-    const newEnergy = Number(user.energyBalance) + energyProduced;
+    for (const plan of validPlans) {
+      const hourlyRate = Number(plan.dailyMax) / 6;
+      totalEarned += (hourlyRate / 3600) * seconds;
+      totalEnergy += (Number(plan.powerKw) / 3600) * seconds;
+    }
+    
+    const newBalance = Number(user.balance) + totalEarned;
+    const newEnergy = Number(user.energyBalance) + totalEnergy;
     const newTime = user.totalConnectedTime + seconds;
     
     const updatedUser = await storage.updateUser(user.id, {
@@ -182,11 +182,13 @@ export async function registerRoutes(
       return res.status(400).json({ message: "Insufficient funds" });
     }
     
-    // Deduct balance and update plan
+    // Deduct balance and add to active plans
     const newBalance = Number(user.balance) - Number(plan.price);
+    const activePlanIds = [...(user.activePlanIds || []), plan.id];
+
     await storage.updateUser(user.id, {
       balance: newBalance.toFixed(2),
-      currentPlanId: plan.id,
+      activePlanIds: activePlanIds,
     });
     
     await storage.createTransaction({

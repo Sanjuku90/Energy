@@ -21,29 +21,30 @@ export default function Dashboard() {
   
   if (!user || !plans) return null; // Or skeleton
 
-  const currentPlan = plans.find(p => p.id === user.currentPlanId);
-  const powerOutput = currentPlan ? parseFloat(currentPlan.powerKw) : 0;
+  const activePlans = plans.filter(p => user.activePlanIds?.includes(p.id));
+  const totalPower = activePlans.reduce((sum, p) => sum + parseFloat(p.powerKw), 0);
+  const mainPlan = activePlans[0];
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h1 className="text-3xl font-display font-bold text-foreground">Control Center</h1>
-          <p className="text-muted-foreground">Monitoring active energy production matrix.</p>
+          <p className="text-muted-foreground">Monitoring {activePlans.length} active energy production units.</p>
         </div>
         <div className="flex items-center gap-2 bg-card border border-border px-4 py-2 rounded-full">
-          <div className={cn("w-2 h-2 rounded-full", isMining && currentPlan ? "bg-primary animate-pulse" : "bg-muted")} />
+          <div className={cn("w-2 h-2 rounded-full", isMining && activePlans.length > 0 ? "bg-primary animate-pulse" : "bg-muted")} />
           <span className="text-sm font-mono text-primary uppercase">
-            {isMining && currentPlan ? "LIVE CONNECTION" : "DISCONNECTED"}
+            {isMining && activePlans.length > 0 ? "LIVE CONNECTION" : "DISCONNECTED"}
           </span>
         </div>
       </div>
 
-      {currentPlan ? (
+      {activePlans.length > 0 ? (
         <PowerStation 
-          powerOutput={powerOutput} 
+          powerOutput={totalPower} 
           isActive={isMining} 
-          planName={currentPlan.name} 
+          planName={`${activePlans.length} Units Active`} 
         />
       ) : (
         <Card className="bg-card border-dashed border-2 border-border/50 p-12 text-center">
@@ -76,11 +77,11 @@ export default function Dashboard() {
           color="text-accent"
         />
         <StatCard 
-          title="Current Plan" 
-          value={currentPlan?.name || "None"} 
+          title="Active Units" 
+          value={activePlans.length} 
           icon={Battery}
-          subtext={currentPlan ? `$${currentPlan.dailyMin}-$${currentPlan.dailyMax}/day` : "No active production"}
-          color={currentPlan ? "text-yellow-500" : "text-muted-foreground"}
+          subtext={`${totalPower.toFixed(2)} kW Total Power`}
+          color={activePlans.length > 0 ? "text-yellow-500" : "text-muted-foreground"}
         />
         <StatCard 
           title="Efficiency" 
