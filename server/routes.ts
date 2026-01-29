@@ -137,8 +137,9 @@ export async function registerRoutes(
     let energyProduced = 0;
 
     for (const plan of validPlans) {
-      const hourlyRate = Number(plan.dailyMax) / 6;
-      earnedAmount += (hourlyRate / 3600) * seconds;
+      // Formula provided by user: gain_par_seconde = puissance_kw * 1.50 / 3600
+      const gainPerSecond = (Number(plan.powerKw) * 1.50) / 3600;
+      earnedAmount += gainPerSecond * seconds;
       energyProduced += (Number(plan.powerKw) / 3600) * seconds;
     }
     
