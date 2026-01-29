@@ -5,31 +5,36 @@ import PowerStation from "@/components/PowerStation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Battery, Zap, DollarSign, TrendingUp, Timer } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
+import { Battery, Zap, DollarSign, TrendingUp, Timer, Award } from "lucide-react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Link } from "wouter";
 
+const getPowerRank = (power: number) => {
+  if (power >= 100) return { name: "Diamond", color: "bg-blue-500", text: "text-blue-500", bonus: 20, next: null, target: 100 };
+  if (power >= 50) return { name: "Platinum", color: "bg-slate-400", text: "text-slate-400", bonus: 15, next: "Diamond", target: 100 };
+  if (power >= 25) return { name: "Gold", color: "bg-yellow-500", text: "text-yellow-500", bonus: 10, next: "Platinum", target: 50 };
+  if (power >= 10) return { name: "Silver", color: "bg-gray-400", text: "text-gray-400", bonus: 5, next: "Gold", target: 25 };
+  return { name: "Bronze", color: "bg-orange-500", text: "text-orange-500", bonus: 0, next: "Silver", target: 10 };
+};
+
 export default function Dashboard() {
-  const { data: user } = useQuery<User>({
+  const { data: user } = useQuery<User & { rank?: string; bonus?: string }>({
     queryKey: ["/api/user"],
-    refetchInterval: 500, // Update even faster for smoother UI
+    refetchInterval: 500,
   });
   const { data: plans } = usePlans();
   
-  // Mining hook automatically sends heartbeats
   const { isMining } = useMiningHeartbeat();
   
-  if (!user || !plans) return null; // Or skeleton
+  if (!user || !plans) return null;
 
   const activePlans = plans.filter(p => user.activePlanIds?.includes(p.id));
   const totalPower = activePlans.reduce((sum, p) => sum + parseFloat(p.powerKw), 0);
+  const rankInfo = getPowerRank(totalPower);
   
-  // Calculate remaining time for the 6h daily production limit
-  // Max production per day: 6 hours (21600 seconds)
   const MAX_DAILY_SECONDS = 21600;
-  // We'll use totalConnectedTime modulo daily limit to show time remaining in current "cycle"
-  // or simple count of how much is left of the 6h if we assume it's a daily limit.
   const connectedToday = user.totalConnectedTime % MAX_DAILY_SECONDS;
   const remainingSeconds = MAX_DAILY_SECONDS - connectedToday;
   
@@ -47,34 +52,83 @@ export default function Dashboard() {
           <h1 className="text-3xl font-display font-bold text-foreground">Control Center</h1>
           <p className="text-muted-foreground">Monitoring {activePlans.length} active energy production units.</p>
         </div>
-        <div className="flex items-center gap-2 bg-card border border-border px-4 py-2 rounded-full">
-          <div className={cn("w-2 h-2 rounded-full", isMining && activePlans.length > 0 ? "bg-primary animate-pulse" : "bg-muted")} />
-          <span className="text-sm font-mono text-primary uppercase">
-            {isMining && activePlans.length > 0 ? "LIVE CONNECTION" : "DISCONNECTED"}
-          </span>
+        <div className="flex items-center gap-4">
+          <Card className="bg-card border-border/50 px-4 py-2 flex items-center gap-3">
+            <div className={cn("p-1.5 rounded-full", rankInfo.color)}>
+              <Award className="w-4 h-4 text-white" />
+            </div>
+            <div>
+              <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">Current Rank</p>
+              <p className={cn("text-sm font-bold", rankInfo.text)}>{rankInfo.name} ({rankInfo.bonus}% Bonus)</p>
+            </div>
+          </Card>
+          <div className="flex items-center gap-2 bg-card border border-border px-4 py-2 rounded-full">
+            <div className={cn("w-2 h-2 rounded-full", isMining && activePlans.length > 0 ? "bg-primary animate-pulse" : "bg-muted")} />
+            <span className="text-sm font-mono text-primary uppercase">
+              {isMining && activePlans.length > 0 ? "LIVE" : "OFFLINE"}
+            </span>
+          </div>
         </div>
       </div>
 
-      {activePlans.length > 0 ? (
-        <PowerStation 
-          powerOutput={totalPower} 
-          isActive={isMining} 
-          planName={`${activePlans.length} Units Active`} 
-        />
-      ) : (
-        <Card className="bg-card border-dashed border-2 border-border/50 p-12 text-center">
-          <CardContent className="space-y-4">
-            <Battery className="w-12 h-12 mx-auto text-muted-foreground opacity-20" />
-            <h2 className="text-xl font-display font-bold">No Active Power Plan</h2>
-            <p className="text-muted-foreground max-w-sm mx-auto">
-              You haven't activated a power station yet. Purchase a plan to start mining energy.
-            </p>
-            <Button asChild>
-              <Link href="/plans">View Available Plans</Link>
-            </Button>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2">
+          {activePlans.length > 0 ? (
+            <PowerStation 
+              powerOutput={totalPower} 
+              isActive={isMining} 
+              planName={`${activePlans.length} Units Active`} 
+            />
+          ) : (
+            <Card className="bg-card border-dashed border-2 border-border/50 p-12 text-center h-full flex flex-col justify-center">
+              <CardContent className="space-y-4">
+                <Battery className="w-12 h-12 mx-auto text-muted-foreground opacity-20" />
+                <h2 className="text-xl font-display font-bold">No Active Power Plan</h2>
+                <p className="text-muted-foreground max-w-sm mx-auto">
+                  You haven't activated a power station yet. Purchase a plan to start mining energy.
+                </p>
+                <Button asChild>
+                  <Link href="/plans">View Available Plans</Link>
+                </Button>
+              </CardContent>
+            </Card>
+          )}
+        </div>
+
+        <Card className="bg-card border-border/50 shadow-lg p-6">
+          <CardHeader className="p-0 mb-4">
+            <CardTitle className="text-sm font-medium text-muted-foreground uppercase tracking-wider flex items-center gap-2">
+              <TrendingUp className="w-4 h-4 text-primary" />
+              Rank Progression
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-0 space-y-6">
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span className="font-bold">{rankInfo.name}</span>
+                <span className="text-muted-foreground">{totalPower.toFixed(2)} / {rankInfo.target} kW</span>
+              </div>
+              <Progress value={(totalPower / rankInfo.target) * 100} className="h-2" />
+              {rankInfo.next && (
+                <p className="text-[11px] text-muted-foreground italic">
+                  Reach {rankInfo.target} kW to unlock <span className="text-primary font-bold">{rankInfo.next}</span> level (+5% more gains)
+                </p>
+              )}
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-3 bg-black/20 rounded-lg border border-white/5">
+                <p className="text-[10px] text-muted-foreground uppercase">Rank Bonus</p>
+                <p className="text-lg font-bold text-primary">+{rankInfo.bonus}%</p>
+              </div>
+              <div className="p-3 bg-black/20 rounded-lg border border-white/5">
+                <p className="text-[10px] text-muted-foreground uppercase">Power Score</p>
+                <p className="text-lg font-bold text-accent">{totalPower.toFixed(1)}</p>
+              </div>
+            </div>
           </CardContent>
         </Card>
-      )}
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard 
