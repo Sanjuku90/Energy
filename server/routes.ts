@@ -122,27 +122,34 @@ export async function registerRoutes(
     if (!req.isAuthenticated()) return res.status(401).send();
     
     // Logic: Calculate earnings based on plan and time
-    // This is a simplified simulation
     const user = req.user as any;
     const activePlans = await Promise.all(
       (user.activePlanIds || []).map((id: number) => storage.getPlan(id))
     );
     
     const validPlans = activePlans.filter((p): p is Plan => p !== undefined);
+    
+    let totalPowerKw = 0;
+    for (const plan of validPlans) {
+      totalPowerKw += parseFloat(plan.powerKw.toString());
+    }
+
+    // Determine Rank based on power
+    let bonusMultiplier = 1.0;
+    if (totalPowerKw >= 100) bonusMultiplier = 1.20; // 20% bonus
+    else if (totalPowerKw >= 50) bonusMultiplier = 1.15; // 15% bonus
+    else if (totalPowerKw >= 25) bonusMultiplier = 1.10; // 10% bonus
+    else if (totalPowerKw >= 10) bonusMultiplier = 1.05; // 5% bonus
+
     if (validPlans.length === 0) return res.status(200).json({ earnedAmount: 0, newBalance: Number(user.balance), energyProduced: 0 });
 
     const seconds = req.body.connectedSeconds || 1;
     
-    let earnedAmount = 0;
-    let energyProduced = 0;
+    const gainPerSecond = (totalPowerKw * 1.50 * bonusMultiplier) / 3600;
+    const energyPerSecond = totalPowerKw / 3600;
 
-    for (const plan of validPlans) {
-      // User formula: gain_par_seconde = (puissance_kw * 1.50) / 3600
-      const kw = parseFloat(plan.powerKw.toString());
-      const gainPerSecond = (kw * 1.50) / 3600;
-      earnedAmount += gainPerSecond * seconds;
-      energyProduced += (kw / 3600) * seconds;
-    }
+    const earnedAmount = gainPerSecond * seconds;
+    const energyProduced = energyPerSecond * seconds;
     
     // Crucial: Use more decimals for the intermediate sum before rounding
     const currentBalance = parseFloat(user.balance.toString());
@@ -163,6 +170,8 @@ export async function registerRoutes(
       earnedAmount,
       newBalance: parseFloat(newBalance.toFixed(8)),
       energyProduced,
+      rank: totalPowerKw >= 100 ? "Diamond" : totalPowerKw >= 50 ? "Platinum" : totalPowerKw >= 25 ? "Gold" : totalPowerKw >= 10 ? "Silver" : "Bronze",
+      bonus: bonusMultiplier > 1 ? `${Math.round((bonusMultiplier - 1) * 100)}%` : "0%"
     });
   });
 
