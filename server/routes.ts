@@ -131,36 +131,37 @@ export async function registerRoutes(
     const validPlans = activePlans.filter((p): p is Plan => p !== undefined);
     if (validPlans.length === 0) return res.status(200).json({ earnedAmount: 0, newBalance: Number(user.balance), energyProduced: 0 });
 
-    const seconds = req.body.connectedSeconds || 60;
+    const seconds = req.body.connectedSeconds || 1;
     
     let earnedAmount = 0;
     let energyProduced = 0;
 
     for (const plan of validPlans) {
-      // Formula provided by user: gain_par_seconde = puissance_kw * 1.50 / 3600
-      const gainPerSecond = (Number(plan.powerKw) * 1.50) / 3600;
+      // User formula: gain_par_seconde = (puissance_kw * 1.50) / 3600
+      const kw = parseFloat(plan.powerKw.toString());
+      const gainPerSecond = (kw * 1.50) / 3600;
       earnedAmount += gainPerSecond * seconds;
-      energyProduced += (Number(plan.powerKw) / 3600) * seconds;
+      energyProduced += (kw / 3600) * seconds;
     }
     
-    const newBalance = Number(user.balance) + earnedAmount;
-    const newEnergy = Number(user.energyBalance) + energyProduced;
-    const newTime = user.totalConnectedTime + seconds;
+    // Crucial: Use more decimals for the intermediate sum before rounding
+    const currentBalance = parseFloat(user.balance.toString());
+    const currentEnergy = parseFloat(user.energyBalance.toString());
+    
+    const newBalance = currentBalance + earnedAmount;
+    const newEnergy = currentEnergy + energyProduced;
+    const newTime = (user.totalConnectedTime || 0) + seconds;
     
     const updatedUser = await storage.updateUser(user.id, {
-      balance: newBalance.toFixed(8), // Increased precision for 1s updates
+      balance: newBalance.toFixed(8), 
       energyBalance: newEnergy.toFixed(8),
       totalConnectedTime: newTime,
       lastHeartbeat: new Date(),
     });
     
-    // Create 'mining' transaction periodically or just accumulate?
-    // For simplicity, we just update balance here. 
-    // A real app might batch transactions.
-    
     res.json({
       earnedAmount,
-      newBalance: Number(updatedUser.balance),
+      newBalance: parseFloat(newBalance.toFixed(8)),
       energyProduced,
     });
   });
