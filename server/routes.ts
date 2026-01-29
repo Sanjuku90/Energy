@@ -34,16 +34,27 @@ export async function registerRoutes(
   app: Express
 ): Promise<Server> {
   // === AUTH SETUP ===
+  const isProduction = process.env.NODE_ENV === "production";
+  
+  if (isProduction) {
+    app.set('trust proxy', 1);
+  }
+  
   app.use(
     session({
       store: new pgSessionStore({ 
         pool, 
-        createTableIfMissing: process.env.NODE_ENV !== "production" 
+        createTableIfMissing: !isProduction 
       }),
       secret: process.env.SESSION_SECRET || "default_secret",
       resave: false,
       saveUninitialized: false,
-      cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
+      cookie: { 
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+        secure: isProduction,
+        sameSite: isProduction ? 'none' : 'lax',
+        httpOnly: true,
+      },
     })
   );
 
