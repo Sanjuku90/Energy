@@ -11,7 +11,19 @@ const client = new pg.Client({ connectionString: DATABASE_URL });
 
 async function migrate() {
   try {
-    await client.connect();
+    // Check if users table exists
+    const checkTable = await client.query(`
+      SELECT EXISTS (
+        SELECT FROM information_schema.tables 
+        WHERE table_name = 'users'
+      )
+    `);
+
+    if (!checkTable.rows[0].exists) {
+      console.log("Users table does not exist, skipping migration");
+      return;
+    }
+
     console.log("Connected to database");
 
     // Check if active_plan_ids column exists
