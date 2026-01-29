@@ -48,29 +48,31 @@ export default function PowerStation({ powerOutput, isActive, planName }: PowerS
 
       {/* Wind Turbines */}
       <div className="absolute bottom-12 left-1/4 z-10 opacity-80">
-        <div className="relative w-2 h-24 bg-foreground/20 rounded-full mx-auto">
+        <div className="relative w-1.5 h-24 bg-slate-400 dark:bg-slate-700 rounded-full mx-auto shadow-sm">
           <motion.div 
             className="absolute -top-1 left-1/2 -translate-x-1/2 w-32 h-32"
             animate={isActive ? { rotate: 360 } : { rotate: 0 }}
             transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
           >
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-16 bg-white/10 rounded-full origin-bottom" />
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-16 bg-white/10 rounded-full origin-bottom rotate-120" style={{ transform: 'rotate(120deg)' }} />
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-16 bg-white/10 rounded-full origin-bottom rotate-240" style={{ transform: 'rotate(240deg)' }} />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-600 z-10" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-full w-0.5 h-14 bg-white/20 rounded-full origin-bottom" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-full w-0.5 h-14 bg-white/20 rounded-full origin-bottom" style={{ transform: 'translate(-50%, -100%) rotate(120deg)' }} />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-full w-0.5 h-14 bg-white/20 rounded-full origin-bottom" style={{ transform: 'translate(-50%, -100%) rotate(240deg)' }} />
           </motion.div>
         </div>
       </div>
 
       <div className="absolute bottom-20 right-1/4 z-10 opacity-60 scale-75">
-        <div className="relative w-2 h-24 bg-foreground/20 rounded-full mx-auto">
+        <div className="relative w-1.5 h-24 bg-slate-400 dark:bg-slate-700 rounded-full mx-auto shadow-sm">
           <motion.div 
             className="absolute -top-1 left-1/2 -translate-x-1/2 w-32 h-32"
             animate={isActive ? { rotate: -360 } : { rotate: 0 }}
             transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
           >
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-16 bg-white/10 rounded-full origin-bottom" />
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-16 bg-white/10 rounded-full origin-bottom rotate-120" style={{ transform: 'rotate(120deg)' }} />
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-16 bg-white/10 rounded-full origin-bottom rotate-240" style={{ transform: 'rotate(240deg)' }} />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-600 z-10" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-full w-0.5 h-14 bg-white/20 rounded-full origin-bottom" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-full w-0.5 h-14 bg-white/20 rounded-full origin-bottom" style={{ transform: 'translate(-50%, -100%) rotate(120deg)' }} />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-full w-0.5 h-14 bg-white/20 rounded-full origin-bottom" style={{ transform: 'translate(-50%, -100%) rotate(240deg)' }} />
           </motion.div>
         </div>
       </div>
