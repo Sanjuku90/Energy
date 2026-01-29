@@ -43,20 +43,20 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Top Navbar */}
-      <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-md">
-        <div className="container flex h-16 items-center justify-between px-4 md:px-8 max-w-7xl mx-auto">
-          <div className="flex items-center gap-6">
+      <header className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-md">
+        <div className="container flex h-16 items-center justify-between px-6 max-w-7xl mx-auto">
+          <div className="flex items-center gap-8">
             <Link href="/dashboard" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
+              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-primary-foreground shadow-lg shadow-primary/20 group-hover:scale-105 transition-all">
                 <Zap className="w-6 h-6 fill-current" />
               </div>
               <div className="hidden sm:block">
-                <h1 className="font-display text-lg leading-none tracking-wider text-foreground uppercase">Energy Bank</h1>
-                <p className="text-[10px] text-muted-foreground font-mono mt-1 uppercase tracking-tighter">v2.0.4 Online</p>
+                <h1 className="text-xl font-bold tracking-tight text-foreground">Energy Bank</h1>
+                <p className="text-[10px] text-muted-foreground font-medium uppercase tracking-widest leading-none">Professional v2.0</p>
               </div>
             </Link>
 
-            <nav className="hidden md:flex items-center gap-1">
+            <nav className="hidden lg:flex items-center gap-1">
               {navItems.map((item) => {
                 const Icon = item.icon;
                 const isActive = location === item.href;
@@ -65,10 +65,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     key={item.href} 
                     href={item.href}
                     className={cn(
-                      "flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium",
+                      "flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 text-sm font-medium",
                       isActive 
-                        ? "bg-primary/10 text-primary" 
-                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                        ? "bg-primary/10 text-primary shadow-sm" 
+                        : "text-muted-foreground hover:bg-accent hover:text-foreground"
                     )}
                   >
                     <Icon className={cn("w-4 h-4", isActive && "animate-pulse")} />
@@ -79,10 +79,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </nav>
           </div>
 
-          <div className="flex items-center gap-4">
-            <div className="hidden sm:flex flex-col items-end mr-2">
-              <p className="text-[10px] text-muted-foreground uppercase font-mono leading-none mb-1">Balance</p>
-              <p className="text-sm font-display font-bold text-primary text-glow">${Number(user.balance).toFixed(2)}</p>
+          <div className="flex items-center gap-6">
+            <div className="hidden sm:flex flex-col items-end border-r pr-6 border-border">
+              <p className="text-[10px] text-muted-foreground uppercase font-semibold tracking-wider leading-none mb-1">Total Balance</p>
+              <p className="text-lg font-bold text-foreground">${Number(user.balance).toFixed(2)}</p>
             </div>
 
             <DropdownMenu>
@@ -152,14 +152,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-x-hidden relative">
-        <div className="fixed inset-0 z-0 opacity-[0.03] pointer-events-none" 
-             style={{ 
-               backgroundImage: `linear-gradient(hsl(var(--primary)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px)`, 
-               backgroundSize: '40px 40px' 
-             }} 
-        />
-        <div className="relative z-10 p-4 md:p-8 max-w-7xl mx-auto">
+      <main className="flex-1 overflow-x-hidden relative bg-slate-50/50 dark:bg-transparent">
+        <div className="relative z-10 p-6 md:p-10 max-w-7xl mx-auto animate-in fade-in duration-700">
           {children}
         </div>
       </main>
