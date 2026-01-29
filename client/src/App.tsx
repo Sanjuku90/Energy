@@ -14,12 +14,18 @@ import Wallet from "@/pages/Wallet";
 import AdminPanel from "@/pages/AdminPanel";
 import Profile from "@/pages/Profile";
 import Settings from "@/pages/Settings";
+import FAQ from "@/pages/FAQ";
+import Terms from "@/pages/Terms";
+import Privacy from "@/pages/Privacy";
 
 function Router() {
   return (
     <Switch>
-      {/* Public Route */}
+      {/* Public Routes */}
       <Route path="/" component={Home} />
+      <Route path="/faq" component={FAQ} />
+      <Route path="/terms" component={Terms} />
+      <Route path="/privacy" component={Privacy} />
 
       {/* Protected Routes (Layout handles auth check visual, page handles redirect logic if needed) */}
       <Route path="/dashboard">
