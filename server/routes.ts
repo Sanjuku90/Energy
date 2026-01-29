@@ -147,8 +147,8 @@ export async function registerRoutes(
     const newTime = user.totalConnectedTime + seconds;
     
     const updatedUser = await storage.updateUser(user.id, {
-      balance: newBalance.toFixed(4), // Increased precision for 1s updates
-      energyBalance: newEnergy.toFixed(6),
+      balance: newBalance.toFixed(8), // Increased precision for 1s updates
+      energyBalance: newEnergy.toFixed(8),
       totalConnectedTime: newTime,
       lastHeartbeat: new Date(),
     });

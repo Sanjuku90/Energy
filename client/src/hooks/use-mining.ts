@@ -30,7 +30,7 @@ export function useMiningHeartbeat() {
         return {
           ...old,
           balance: data.newBalance.toString(),
-          energyBalance: (parseFloat(old.energyBalance) + data.energyProduced).toString(),
+          energyBalance: (parseFloat(data.energyProduced.toString()) + parseFloat(old.energyBalance)).toString(),
         };
       });
     },
