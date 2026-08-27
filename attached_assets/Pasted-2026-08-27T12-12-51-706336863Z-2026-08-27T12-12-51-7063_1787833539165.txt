@@ -1,0 +1,100 @@
+2026-08-27T12:12:51.706336863Z 
+2026-08-27T12:12:51.706341981Z 12 vulnerabilities (2 low, 1 moderate, 9 high)
+2026-08-27T12:12:51.706343569Z 
+2026-08-27T12:12:51.706345108Z To address issues that do not require attention, run:
+2026-08-27T12:12:51.706346526Z   npm audit fix
+2026-08-27T12:12:51.70634795Z 
+2026-08-27T12:12:51.706349482Z To address all issues (including breaking changes), run:
+2026-08-27T12:12:51.706351584Z   npm audit fix --force
+2026-08-27T12:12:51.706352786Z 
+2026-08-27T12:12:51.706354883Z Run `npm audit` for details.
+2026-08-27T12:12:51.814876584Z 
+2026-08-27T12:12:51.814887675Z > rest-express@1.0.0 build
+2026-08-27T12:12:51.81488995Z > tsx script/build.ts
+2026-08-27T12:12:51.814891331Z 
+2026-08-27T12:12:52.434757272Z building client...
+2026-08-27T12:12:52.484715739Z vite v7.3.1 building client environment for production...
+2026-08-27T12:12:52.935345239Z transforming...
+2026-08-27T12:12:53.153980975Z Browserslist: browsers data (caniuse-lite) is 7 months old. Please run:
+2026-08-27T12:12:53.154000255Z   npx update-browserslist-db@latest
+2026-08-27T12:12:53.154002808Z   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+2026-08-27T12:12:56.412619522Z ✓ 2528 modules transformed.
+2026-08-27T12:12:56.754437189Z rendering chunks...
+2026-08-27T12:12:56.763142286Z computing gzip size...
+2026-08-27T12:12:56.781681968Z ../dist/public/index.html                   2.01 kB │ gzip:   0.77 kB
+2026-08-27T12:12:56.781697944Z ../dist/public/assets/index-BuUCTbG5.css   76.97 kB │ gzip:  12.75 kB
+2026-08-27T12:12:56.781791359Z ../dist/public/assets/index-nZ9jut9P.js   691.31 kB │ gzip: 210.41 kB
+2026-08-27T12:12:56.78186985Z 
+2026-08-27T12:12:56.781872713Z (!) Some chunks are larger than 500 kB after minification. Consider:
+2026-08-27T12:12:56.78187521Z - Using dynamic import() to code-split the application
+2026-08-27T12:12:56.781877031Z - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+2026-08-27T12:12:56.781878923Z - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+2026-08-27T12:12:56.782196819Z ✓ built in 4.14s
+2026-08-27T12:12:56.78228662Z building server...
+2026-08-27T12:12:56.958173185Z 
+2026-08-27T12:12:56.958192731Z   dist/index.cjs  1.0mb ⚠️
+2026-08-27T12:12:56.958194339Z 
+2026-08-27T12:12:56.958196495Z ⚡ Done in 164ms
+2026-08-27T12:12:57.13393338Z 
+2026-08-27T12:12:57.133965036Z > rest-express@1.0.0 db:push
+2026-08-27T12:12:57.13396875Z > drizzle-kit push --force
+2026-08-27T12:12:57.133971024Z 
+2026-08-27T12:12:57.258849227Z No config path provided, using default 'drizzle.config.ts'
+2026-08-27T12:12:57.259064177Z Reading config file '/opt/render/project/src/drizzle.config.ts'
+2026-08-27T12:12:57.546356073Z Using 'pg' driver for database querying
+2026-08-27T12:12:57.713893645Z [⣷] Pulling schema from database...
+2026-08-27T12:12:57.765316596Z Error: getaddrinfo ENOTFOUND dpg-d5tn3qq4d50c73caff20-a
+2026-08-27T12:12:57.765327084Z     at /opt/render/project/src/node_modules/pg-pool/index.js:45:11
+2026-08-27T12:12:57.765329399Z     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2026-08-27T12:12:57.765330857Z     at async Object.query (/opt/render/project/src/node_modules/drizzle-kit/bin.cjs:80622:26)
+2026-08-27T12:12:57.765332519Z     at async fromDatabase2 (/opt/render/project/src/node_modules/drizzle-kit/bin.cjs:19276:25) {
+2026-08-27T12:12:57.765333939Z   errno: -3008,
+2026-08-27T12:12:57.765335549Z   code: 'ENOTFOUND',
+2026-08-27T12:12:57.765337255Z   syscall: 'getaddrinfo',
+2026-08-27T12:12:57.765338939Z   hostname: 'dpg-d5tn3qq4d50c73caff20-a'
+2026-08-27T12:12:57.765340197Z }
+2026-08-27T12:12:58.206276136Z ==> Uploading build...
+2026-08-27T12:13:04.240448022Z ==> Uploaded in 4.3s. Compression took 1.8s
+2026-08-27T12:13:04.243047815Z ==> Build successful 🎉
+2026-08-27T12:13:05.579135543Z ==> Deploying...
+2026-08-27T12:13:05.694514221Z ==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
+2026-08-27T12:13:22.182490201Z ==> Running 'npm run start'
+2026-08-27T12:13:23.086215199Z 
+2026-08-27T12:13:23.08624127Z > rest-express@1.0.0 start
+2026-08-27T12:13:23.08626118Z > tsx script/migrate.ts && NODE_ENV=production node dist/index.cjs
+2026-08-27T12:13:23.086267411Z 
+2026-08-27T12:13:26.617549962Z Migration failed: Error: getaddrinfo ENOTFOUND dpg-d5tn3qq4d50c73caff20-a
+2026-08-27T12:13:26.617576182Z     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+2026-08-27T12:13:26.617580062Z   errno: -3008,
+2026-08-27T12:13:26.617583803Z   code: 'ENOTFOUND',
+2026-08-27T12:13:26.617587532Z   syscall: 'getaddrinfo',
+2026-08-27T12:13:26.617591033Z   hostname: 'dpg-d5tn3qq4d50c73caff20-a'
+2026-08-27T12:13:26.617594283Z }
+2026-08-27T12:13:30.552135078Z ==> Exited with status 1
+2026-08-27T12:13:30.555731546Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+2026-08-27T12:13:34.774392608Z ==> Running 'npm run start'
+2026-08-27T12:13:35.783573684Z 
+2026-08-27T12:13:35.783589184Z > rest-express@1.0.0 start
+2026-08-27T12:13:35.783593964Z > tsx script/migrate.ts && NODE_ENV=production node dist/index.cjs
+2026-08-27T12:13:35.783596835Z 
+2026-08-27T12:13:38.87758188Z Migration failed: Error: getaddrinfo ENOTFOUND dpg-d5tn3qq4d50c73caff20-a
+2026-08-27T12:13:38.87760065Z     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+2026-08-27T12:13:38.877603721Z   errno: -3008,
+2026-08-27T12:13:38.87760715Z   code: 'ENOTFOUND',
+2026-08-27T12:13:38.877611671Z   syscall: 'getaddrinfo',
+2026-08-27T12:13:38.877616601Z   hostname: 'dpg-d5tn3qq4d50c73caff20-a'
+2026-08-27T12:13:38.877620651Z }
+2026-08-27T12:14:02.29516382Z ==> Running 'npm run start'
+2026-08-27T12:14:03.196541582Z 
+2026-08-27T12:14:03.196575043Z > rest-express@1.0.0 start
+2026-08-27T12:14:03.196585343Z > tsx script/migrate.ts && NODE_ENV=production node dist/index.cjs
+2026-08-27T12:14:03.196588193Z 
+2026-08-27T12:14:06.214537304Z Migration failed: Error: getaddrinfo ENOTFOUND dpg-d5tn3qq4d50c73caff20-a
+2026-08-27T12:14:06.214567425Z     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+2026-08-27T12:14:06.214571055Z   errno: -3008,
+2026-08-27T12:14:06.214574925Z   code: 'ENOTFOUND',
+2026-08-27T12:14:06.214578385Z   syscall: 'getaddrinfo',
+2026-08-27T12:14:06.214582705Z   hostname: 'dpg-d5tn3qq4d50c73caff20-a'
+2026-08-27T12:14:06.214585425Z }
+2026-08-27T12:14:09.307084893Z ==> No open ports detected, continuing to scan...
+2026-08-27T12:14:09.500027056Z ==> Docs on specifying a port: https://render.com/docs/web-services#port-binding
